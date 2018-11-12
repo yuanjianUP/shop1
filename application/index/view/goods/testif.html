@@ -1,0 +1,19 @@
+{if condition="$status eq 1"}
+	正常状态
+{elseif condition="$status eq 2" /}
+	不正常状态
+{else /}
+	非常状态
+{/if}
+<hr/>
+status 只有两个状态
+{eq name="status" value="1"}
+正常
+{else /}
+不正常
+{/eq}
+{eq name="data.status" value="$value.0"}
+正常
+{else /}
+不正常
+{/eq}

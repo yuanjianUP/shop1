@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	数据的添加时间：{$data.0.time|date='Y-m-d',###}<hr/>
+	省略变量本身:{$string|strtoupper}<hr/>
+	多个函数进行格式化：{$string|strtoupper|substr=0,3}<hr/>
+	自定义函数格式化数据:{$url|makeU}<hr/>
+	php原生方式使用函数：<?php echo url('index/index/index'); ?><hr/>
+	特殊写法{:url('index/index/index')}
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	foreach循环显示数据：<br/>
+	{foreach name="data" item="vo" key="i"}
+		下标为:{$i}---名称{$vo.cname}<br/>
+	{/foreach}
+	<hr>
+	volist循环显示数据：<br/>
+	{volist name="data" id="vo"}
+		下标：{$key}---循环次数为:{$i}---名称：{$vo.cname}<br/>
+	{/volist}
+	<hr>
+	volist循环offset显示数据：<br/>
+	{volist name="data" id="vo" offset="1" length="1"}
+		下标：{$key}---循环次数为:{$i}---名称：{$vo.cname}<br/>
+	{/volist}
+	<hr>
+	volist循环empty 使用：<br/>
+	{volist name="datas" id="vo" empty='no data'}
+		下标：{$key}---循环次数为:{$i}---名称：{$vo.cname}<br/>
+	{/volist}
+	<hr>
+	volist循环mod隔行换色使用：<br/>
+	{volist name="data" id="vo" mod="2"}
+		mod值:{$mod}---下标：{$key}---循环次数为:{$i}---名称：{$vo.cname}<br/>
+		{eq name="mod" value="1"}<hr/>{/eq}
+	{/volist}
+	<hr>
+	volist循环key使用：<br/>
+	{volist name="data" id="vo" key="keys"}
+		keys值:{$keys}---下标：{$key}---名称：{$vo.cname}<br/>
+	{/volist}
+</body>
+</html>
