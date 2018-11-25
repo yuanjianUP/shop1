@@ -17,7 +17,7 @@ class Category extends Common
         if(request()->isGet()){
             $model = model('category');
             $cate_tree = $model->getCate();
-            //dump($cate_tree);exit;
+//            dump($cate_tree);exit;
             $this -> assign('cate_tree',$cate_tree);
             return $this -> fetch();
         }
@@ -54,6 +54,16 @@ class Category extends Common
             $this -> assign('data',$data);
             return $this -> fetch();
         }
+    }
+
+    public function del(){
+        $id = input('id');
+        $model = model('category');
+        $result = $model -> del($id);
+        if($result === false){
+            $this -> error($model->getError());
+        }
+        $this -> success('删除成功');
 
 
     }

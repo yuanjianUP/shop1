@@ -13,4 +13,7 @@ namespace tests;
 class TestCase extends \think\testing\TestCase
 {
     protected $baseUrl = 'http://localhost';
+    public function test(){
+        echo 123;
+    }
 }

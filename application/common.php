@@ -18,18 +18,27 @@ function makeU($str){
 }
 
 if(!function_exists('get_tree')){
-    function get_tree($data,$id=0,$lev=0,$pid=null){
+    /**
+     * @param $data
+     * @param int $id
+     * @param null $pid
+     * @param int $lev
+     * @return array
+     */
+    function get_tree($data,$id=null,$pid=0,$lev=0,$isNull=false){
         static $list = [];
+        if($isNull){
+            $list = [];
+        }
         foreach($data as $key=>$value){
-            if($value['id']==$pid){
+            if($value['id']==$id){
                 continue;
             }
-            if($value['parent_id'] == $id){
+            if($value['parent_id'] == $pid){
                 $value['lev'] = $lev;
                 $list[] = $value;
-                get_tree($data,$value['id'],$lev+1);
+                get_tree($data,$id,$value['id'],$lev+1,$isNull);
             }
-
         }
         return $list;
     }
