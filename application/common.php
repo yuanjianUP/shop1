@@ -25,9 +25,9 @@ if(!function_exists('get_tree')){
      * @param int $lev
      * @return array
      */
-    function get_tree($data,$id=null,$pid=0,$lev=0,$isNull=false){
+    function get_tree($data,$id=null,$pid=0,$lev=0,$is_null=false){
         static $list = [];
-        if($isNull){
+        if($is_null){
             $list = [];
         }
         foreach($data as $key=>$value){
@@ -37,9 +37,20 @@ if(!function_exists('get_tree')){
             if($value['parent_id'] == $pid){
                 $value['lev'] = $lev;
                 $list[] = $value;
-                get_tree($data,$id,$value['id'],$lev+1,$isNull);
+                get_tree($data,$id,$value['id'],$lev+1);
             }
         }
         return $list;
+    }
+}
+
+if(!function_exists('ajaxReturn')){
+    function ajaxReturn($message,$status){
+        header('Content-Type:application/json; charset=utf-8');
+        $data = [
+            'message'=>$message,
+            'status'=>$status
+        ];
+        exit(json_encode($data));
     }
 }

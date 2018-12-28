@@ -14,6 +14,7 @@ class Index extends Common
         return $this -> fetch();
     }
     public function menu(){
+        $this->assign('menus',$this -> _user['menu']);
         return $this -> fetch();
     }
 }

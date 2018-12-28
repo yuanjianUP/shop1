@@ -10,22 +10,19 @@ namespace app\admin\controller;
 
 
 use think\Controller;
+use think\Exception;
 
 class Test extends Controller
 {
-        public function errorMessage(){
-            return 'Error line ' . $this->getLine().' in ' . $this->getFile()
-                      .': <b>' . $this->getMessage() . '</b> Must in (0 - 60)';
+    public function wechar(){
+        return $this->fetch();
+    }
+    public function test(){
+        $num = 0;
+        try{
+            echo 1/$num;
+        }catch (Exception $e){
+            echo $e->getMessage();
         }
-        public function test(){
-            $age = 10;
-            try{
-               $age = intval($age);
-               if($age>60){
-                    throw new Test($age);
-               }
-            }catch (){
-
-            }
-        }
+    }
 }

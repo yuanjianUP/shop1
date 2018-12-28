@@ -1,0 +1,54 @@
+{extend name="public:base" /}
+{block name="header"}
+<span class="action-span"><a href="{:url('index')}">属性列表</a></span>
+<span class="action-span1"><a href="">ECSHOP 管理中心</a></span>
+<span id="search_id" class="action-span1"> - 添加类型</span>
+<div style="clear:both"></div>
+{/block}
+{block name="body"}
+<form  action="{:url('add')}" method="post" enctype="multipart/form-data" name="theForm">
+    <table width="90%" id="general-table" align="center">
+        <tr>
+            <td class="label">属性名称：</td>
+            <td>
+                <input type="text" name="attr_name" value="" size="20" />
+            </td>
+        </tr>
+        <tr>
+            <td class="label">所属类型：</td>
+            <td>
+                <select name="type_id">
+                    {foreach $cate as $key=>$value}
+                    <option value="{$value.id}">{$value.type_name}</option>
+                    {/foreach}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="label">属性类型：</td>
+            <td>
+                <input type="radio" name="attr_type" value="1" checked="checked">唯一属性
+                <input type="radio" name="attr_type" value="2">单选属性
+            </td>
+        </tr>
+        <tr>
+            <td class="label">输入框类型：</td>
+            <td>
+                <input type="radio" name="attr_input_type" value="1" checked="checked">文本输入
+                <input type="radio" name="attr_input_type" value="2">选择框
+            </td>
+        </tr>
+        <tr>
+            <td class="label">属性默认值：</td>
+            <td>
+                <textarea rows="5" cols="20" name="attr_values">
+                </textarea>(多个值英文逗号分隔)
+            </td>
+        </tr>
+    </table>
+    <div class="button-div">
+        <input type="submit" value=" 确定 " class="button"/>
+        <input type="reset" value=" 重置 " class="button" />
+    </div>
+</form>
+{/block}

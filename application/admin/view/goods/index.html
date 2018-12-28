@@ -2,6 +2,7 @@
 {block name="src"}
     <link href="__STATIC__/Styles/general.css" rel="stylesheet" type="text/css" />
     <link href="__STATIC__/Styles/main.css" rel="stylesheet" type="text/css" />
+<script src="__STATIC__/js/jquery-1.8.3.min.js"></script>
 {/block}
 {block name="header"}
     <span class="action-span"><a href="{:url('add')}">添加新商品</a></span>
@@ -60,10 +61,10 @@
                 <td align="center" class="first-cell"><span>{$vo.goods_name}</span></td>
                 <td align="center"><span onclick="">{$vo.goods_sn}</span></td>
                 <td align="center"><span>{$vo.shop_price}</span></td>
-                <td align="center"><img src="__STATIC__/Images/{eq name="vo.is_sale" value="1"}yes{else/s}no{/eq}.gif "/></td>
-                <td align="center"><img src="__STATIC__/Images/{eq name="vo.is_rec" value="1"}yes{else/s}no{/eq}.gif "/></td>
-                <td align="center"><img src="__STATIC__/Images/{eq name="vo.is_new" value="1"}yes{else/s}no{/eq}.gif "/></td>
-                <td align="center"><img src="__STATIC__/Images/{eq name="vo.is_hot" value="1"}yes{else/s}no{/eq}.gif "/></td>
+                <td align="center"><img onclick="changeStatus(this,{$vo.id},'is_sale')" src="__STATIC__/Images/{eq name="vo.is_sale" value="1"}yes{else/s}no{/eq}.gif "/></td>
+                <td align="center"><img onclick="changeStatus(this,{$vo.id},'is_rec')" src="__STATIC__/Images/{eq name="vo.is_rec" value="1"}yes{else/s}no{/eq}.gif "/></td>
+                <td align="center"><img onclick="changeStatus(this,{$vo.id},'is_new')" src="__STATIC__/Images/{eq name="vo.is_new" value="1"}yes{else/s}no{/eq}.gif "/></td>
+                <td align="center"><img onclick="changeStatus(this,{$vo.id},'is_hot')" src="__STATIC__/Images/{eq name="vo.is_hot" value="1"}yes{else/s}no{/eq}.gif "/></td>
                 <td align="center">
                 <a href="" target="_blank" title="查看"><img src="__STATIC__/Images/icon_view.gif" width="16" height="16" border="0" /></a>
                 <a href="{:url('edit','goods_id='.$vo['id'])}" title="编辑"><img src="__STATIC__/Images/icon_edit.gif" width="16" height="16" border="0" /></a>
@@ -71,16 +72,41 @@
             </tr>
             {/foreach}
         </table>
-
+        {$data->render()}
         <!-- 分页开始 -->
         <table id="page-table" cellspacing="0">
             <tr>
                 <td width="80%">&nbsp;</td>
                 <td align="center" nowrap="true">
-                    
+
                 </td>
             </tr>
         </table>
     <!-- 分页结束 -->
     </div>
+{/block}
+{block name="js"}
+    <script>
+        function changeStatus(obj,goods_id,type) {
+            $.ajax({
+                url:"{:url('changeStatus')}",
+                type:'post',
+                data:{
+                    goods_id:goods_id,
+                    type:type,
+                },
+                success:function (msg) {
+                    // console.log(msg)
+                    if(msg.status==0){
+                        alert('fail');
+                        return;
+                    }else if(msg.status==1){
+                        $(obj).attr('src','__STATIC__/Images/yes.gif');
+                    }else{
+                        $(obj).attr('src','__STATIC__/Images/no.gif');
+                    }
+                }
+            })
+        }
+    </script>
 {/block}
